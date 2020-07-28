@@ -1,0 +1,49 @@
+{% extends 'dog_aid/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Profile for {{ selected_user.username }}
+{% endblock %}
+
+{% block body_block %}
+<div class="jumbotron p-4">
+    <div class="container">
+        <h1 class="jumbotron-heading">{{ selected_user.username }}'s Profile</h1>
+    </div>
+</div>
+{% if selected_user == user %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="mb-6">
+                <div class="card-body border border-warning">
+                    {% if user_profile.picture %}
+                    <img src="{{ MEDIA_URL }}{{ user_profile.picture }}" width="300" height="300"
+                         alt="{{ selected_user.username }}'s profile image" /><br/><br/>
+                    {% else %}
+                    <img src="https://lorempixel.com/300/300/people/" width="300" height="300" alt="Placeholder image" />
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="mb-6">
+                <div class="card-body border border-warning">
+                    <div class="container">
+                        Name: {{ selected_user.username }}<br/><br/>
+                        Email: {{ selected_user.email }}<br/><br/>
+                        <a href="{% url 'dog_aid:dog_profile_list' %}" class="btn btn-warning" role="button">My Dogs</a><br/><br/>
+                        <a href="{% url 'dog_aid:vet' %}" class="btn btn-warning" role="button">My Vets</a><br/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><br/><br/>
+<div class="container">
+<button class="btn btn-warning" role="button">Edit profile</button><br/><br/>
+</div>
+{% endif %}
+
+<br/>
+{% endblock %}
