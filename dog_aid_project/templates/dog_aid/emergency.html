@@ -1,0 +1,47 @@
+{% extends 'dog_aid/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Emergency
+{% endblock %}
+
+{% block body_block %}
+<div class="jumbotron p-4 bg-white border border-warning">
+    <div class="container">
+        <h1 class="jumbotron-heading text-danger">Emergency first aid</h1>
+        <div>Search any key word to find the appropriate result</div>
+    </div>
+</div>
+
+<div class="mx-auto w-90 ml-9 " style="width:500px">
+  <input type="search" id="search-input" class="form-control ds-input border border-warning" placeholder="Search..."><br/>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="mb-7">
+                <div class="card-body">
+                    <h2 class="text-success mx-auto w-90 ml-9" style="width:210px">Illnesses</h2>
+                    <div class="mx-auto w-90 ml-9" style="width:210px">Search according to a specific illness</div><br/>
+                    <li class="mx-auto w-90 ml-9" style="width:210px">Illness</li>
+                    <li class="mx-auto w-90 ml-9" style="width:210px">Illness</li>
+                    <li class="mx-auto w-90 ml-9" style="width:210px">Illness</li>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="mb-7">
+                <div class="card-body">
+                    <h2 class="text-success mx-auto w-90 ml-9" style="width:210px">Symptoms</h2>
+                    <div class="mx-auto w-90 ml-9" style="width:210px">Search according to symptoms</div><br/>
+                    <li class="mx-auto w-90 ml-9" style="width:210px">Symptom</li>
+                    <li class="mx-auto w-90 ml-9" style="width:210px">Symptom</li>
+                    <li class="mx-auto w-90 ml-9" style="width:210px">Symptom</li>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

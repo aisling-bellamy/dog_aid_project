@@ -1,0 +1,46 @@
+{% extends 'dog_aid/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Edit profile for {{ selected_user.username }}
+{% endblock %}
+
+{% block body_block %}
+<div class="jumbotron p-4">
+    <div class="container">
+        <h1 class="jumbotron-heading">Edit {{ user_profile.dog_name }}'s Profile</h1>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <img src="{{ MEDIA_URL }}{{ user_profile.picture }}"
+             width="300"
+             height="300"
+             alt="{{ selected_user.username }}'s profile image" /> <br />
+        <div>
+            {% if selected_user == user %}
+            Dog Name: {{ user_profile.dog_name }}<br/>
+            Date of birth: {{ user_profile.date_of_birth }}<br/>
+            Breed: {{ user_profile.breed_of_dog }}
+        </div>
+    </div>
+            <div class="container">
+                <h3>Edit your dog's profile:</h3><br/>
+            <form method="post" action="." enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="Update" />
+            </form>
+            </div>
+            {% else %}
+            <p>
+                {{user_profile}}
+                <strong>Website:</strong>
+                <a href="{{ user_profile.website }}">{{ user_profile.website }}</a>
+            </p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

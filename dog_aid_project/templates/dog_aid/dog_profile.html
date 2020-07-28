@@ -1,0 +1,64 @@
+{% extends 'dog_aid/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Profile for {{ selected_user.username }}
+{% endblock %}
+
+{% block body_block %}
+<div class="jumbotron p-4">
+    <div class="container">
+        <h1 class="jumbotron-heading">{{ selected_user.username }}'s Profile</h1>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="mb-3">
+                <div class="card-body">
+                    <!--<img src="{{ MEDIA_URL }}{{ user_profile.picture }}"
+                         width="300" height="300" alt="{{ selected_user.username }}'s profile image" /> <br />-->
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="mb-3">
+                <div class="card-body">
+                    {% if selected_user == user %}
+                    Dog Name: {{ dog_profile.dog_name }}<br/><br/>
+                    Date of birth: {{ dog_profile.date_of_birth }}<br/><br/>
+                    Breed: {{ dog_profile.breed_of_dog }}<br/><br/>
+                    <a href="{% url 'dog_aid:appointment' %}" class="btn btn-warning" role="button">Appointment</a><br/><br/>
+                    <a href="{% url 'dog_aid:vet' %}" class="btn btn-warning" role="button">Vet profile</a><br/><br/>
+                    <a href="{% url 'dog_aid:vet' %}" class="btn btn-warning" role="button">Call vet</a><br/><br/>
+                    <div class="form-group mx-auto w-90 ml-9" style="width:500px">
+                        <label for="comment">Notes:</label>
+                        <textarea class="form-control" rows="5" id="comment"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card mb-4 border border-warning">
+            <div class="card-body">
+                <h2 class="text-success ">Edit profile</h2>
+                <p class="card-text">
+                <form method="post" action="." enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="submit" value="Update" />
+                </form>
+            </div>
+            {% else %}
+            <p>
+                {{user_profile}}
+                <strong>Website:</strong>
+                <a href="{{ user_profile.website }}">{{ user_profile.website }}</a>
+            </p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

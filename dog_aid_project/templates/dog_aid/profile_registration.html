@@ -1,0 +1,21 @@
+{% extends 'dog_aid/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Dog profile: Registration
+{% endblock %}
+
+{% block body_block %}
+<div class="jumbotron p-4 bg-white border border-warning">
+    <div class="container">
+        <h1 class="jumbotron-heading text-success">Register your dog's profile</h1>
+    </div>
+</div>
+<div class="container">
+<form method="post" action=".">
+    {% csrf_token %}
+    {{ dog_form.as_p }}
+<input type="submit" value="Register" /> </form><br/>
+</div>
+
+{% endblock %}

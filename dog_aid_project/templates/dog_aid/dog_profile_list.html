@@ -1,0 +1,48 @@
+{% extends 'dog_aid/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Dog Profiles
+{% endblock %}
+
+{% block body_block %}
+<div class="jumbotron p-4 bg-white border border-warning">
+    <div class="container">
+        <h1 class="jumbotron-heading text-success">Dog profiles</h1>
+        <div>Pick a dog</div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        {% if dog_profile_list %}
+        <div class="panel-body">
+            <div class="list-group ">
+            {% for list_dog in dog_profile_list %}
+                <div class="list-group-item border border-warning">
+                    <h4 class="list-group-item-heading">
+                        <a href="{% url 'dog_aid:dog_profile' list_dog.dog_name %}">
+                        {{ list_dog.dog_name }}
+                        </a>
+                    </h4>
+                </div>
+            {% endfor %}
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="mb-3">
+                <div class="card-body">
+                    <div class="container">
+                            Would you like to register a dog?<br/><br/>
+                            <a href="{% url 'dog_aid:register_dog' %}" class="btn btn-warning" role="button">Register a Dog</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <p>There are no users present on Dog Aid.</p>
+        {% endif %}
+    </div>
+</div>
+<br/><br/>
+{% endblock %}

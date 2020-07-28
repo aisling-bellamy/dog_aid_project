@@ -1,0 +1,40 @@
+{% extends 'dog_aid/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    How can we help?
+{% endblock %}
+
+{% block body_block %}
+<div class="jumbotron p-4 bg-white border border-warning">
+    <div class="container">
+        <h1 class="jumbotron-heading text-success">How can we help?</h1>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card mb-6 border border-warning">
+                <div class="card-body">
+                    <h2 class="text-success">Dog first aid</h2>
+                    <div>Get emergency first aid help</div><br/>
+                    <button onclick="document.location='{% url 'dog_aid:emergency' %}'"
+                            class="btn btn-danger btn-lg">Emergency</button><br/><br/>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card mb-6 border border-warning">
+                <div class="card-body">
+                    <h2 class="text-success">Homepage</h2>
+                    <div>Go to the homepage of Dog Aid</div><br/>
+                    <button onclick="document.location='{% url 'dog_aid:index' %}'"
+                            class="btn btn-warning btn-lg">Homepage</button><br/><br/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br/><br/>
+{% endblock %}

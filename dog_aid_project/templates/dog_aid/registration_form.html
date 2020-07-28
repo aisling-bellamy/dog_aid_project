@@ -1,0 +1,27 @@
+{% extends 'dog_aid/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    User profile: Registration
+{% endblock %}
+
+{% block body_block %}
+<div class="jumbotron p-4 bg-white border border-warning">
+    <div class="container">
+        <h1 class="jumbotron-heading text-success">Register your profile</h1>
+    </div>
+</div>
+{% if registered %}
+<a href="{% url 'dog_aid:index' %}" class="btn btn-warning" role="button">Return to Hompage</a><br/><br/>
+{% else %}
+<div class="container">
+<form id="user_form" method="post" action="{% url 'dog_aid:register' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ user_form.as_p }}
+    {{ profile_form.as_p }}
+    <input type="submit" name="submit" value="Register" /><br/><br/>
+</form>
+</div>
+{% endif %}
+
+{% endblock %}

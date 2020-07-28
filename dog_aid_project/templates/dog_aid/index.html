@@ -1,0 +1,92 @@
+{% extends 'dog_aid/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Homepage
+{% endblock %}
+
+{% block body_block %}
+<div class="jumbotron p-4 bg-white border border-warning">
+    <div class="container">
+        <h1 class="jumbotron-heading text-success">Welcome to Dog Aid</h1>
+        <div>How can we help?</div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        {% if user.is_authenticated %}
+            <div class="col-md-4">
+                <div class="card mb-4 border border-warning">
+                    <div class="card-body">
+                        <h2 class="text-success ">View your profile</h2>
+                        <div>View and edit your dog's profile</div><br/>
+                        <p class="card-text">
+                            <a href="{% url 'dog_aid:profile' user.username %}" class="btn btn-warning" role="button">Profile</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+        <div class="col-md-4">
+            <div class="card mb-4 border border-warning">
+                <div class="card-body">
+                    <h2 class="text-success">Login to your dog's profile</h2>
+                    <div>View your dog's details, appointments etc</div><br/>
+                    <a href="{% url 'auth_login' %}" class="btn btn-warning" role="button">Login</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-4 border border-warning">
+                <div class="card-body">
+                    <h2 class="text-success">Create a profile for you dog</h2>
+                    <div>Register your dog's details, create reminders for appointments and store your dog's medical details</div><br/>
+                    <p class="card-text">
+                        <a href="{% url 'registration_register' %}" class="btn btn-warning" role="button">Register</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        <div class="col-md-4">
+            <div class="card mb-4 border border-warning">
+                <div class="card-body">
+                    <h2 class="text-success">Dog first aid</h2>
+                    <div>Learn how to treat your dog's medical needs and prepare for an emergency situation</div><br/>
+                    <p class="card-text">
+                        <a href="{% url 'dog_aid:illnesses' %}" class="btn btn-warning" role="button">Dog first aid</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-4 border border-warning">
+                <div class="card-body">
+                    <h2 class="text-success">Quiz</h2>
+                    <div>Take the quiz to test your knowledge of dog first aid</div><br/>
+                    <a href="{% url 'dog_aid:quiz' %}" class="btn btn-warning" role="button">Quiz</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-4 border border-warning">
+                <div class="card-body">
+                    <h2 class="text-success">Vet profile</h2>
+                    <div>View or edit your vet's profile</div><br/>
+                    <a href="{% url 'dog_aid:vet' %}" class="btn btn-warning" role="button">Vet profile</a><br/><br/>
+                    <div>Or create a profile for your vet if you do not have one</div><br/>
+                    <a href="{% url 'dog_aid:vet_register' %}" class="btn btn-warning" role="button">Register a vet</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h2 class="text-success">You can also...</h2><br/>
+<div>Use the search bar on the sidebar to find the page you need</div><br/>
+<div>Use the menu bar at the top of the screen to navigate</div><br/><br/><br/>
+<!--Search bar/menu bar lights up when you hover over words?-->
+<!--Or the words "search bar"/"menu bar" are same colour as search bar/menu bar?-->
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'dog_aid/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Vet profile: Registration
+{% endblock %}
+
+{% block body_block %}
+<div class="jumbotron p-4 bg-white border">
+    <div class="container">
+        <h1 class="jumbotron-heading">Register your vet's profile</h1>
+    </div>
+</div>
+<div class="container">
+    {% if registered %}
+    <strong>You are now registered</strong><br/>
+    <a href="{% url 'dog_aid:index' %}">Return to the homepage.</a><br />
+    {% else %}
+    <strong>Fill in your details to register</strong><br /><br/>
+    <form id="user_form" method="post" action="{% url 'dog_aid:vet_register' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="jumbotron p-4 bg-white border">
+            <div class="container">
+                Fill in your details: <br/><br/>
+                {{ vet_form.as_p }}
+            </div>
+            <input type="submit" name="submit" value="Register" />
+        </div>
+    </form><br/>
+</div>
+{% endif %}
+{% endblock %}
