@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from dog_aid.models import UserProfile, VetProfile, DogProfile, DogOwner
+from dog_aid.models import UserProfile, Dog, Vet, DogEvent
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
@@ -13,18 +13,34 @@ class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ('picture',)
+        labels = {
+            "picture": "Profile Picture"
+        }
 
-class DogOwnerForm(forms.ModelForm):
+class DogForm(forms.ModelForm):
     class Meta:
-        model = DogOwner
-        fields = ('owner_name', 'dog', 'vet')
+        model = Dog
+        fields = ('owner', 'name', 'DOB', 'breed', 'picture')
+        labels = {
+            "name": "Name (first name only, one word)",
+            "DOB": "Date of Birth",
+            "picture": "Profile Picture"
+        }
 
-class DogProfileForm(forms.ModelForm):
+class VetForm(forms.ModelForm):
     class Meta:
-        model = DogProfile
-        fields = ('owner', 'dog_name', 'date_of_birth', 'breed_of_dog', 'picture')
+        model = Vet
+        fields = ('name', 'phone_number', 'address', 'type', 'dog_owner')
+        labels = {
+            "type": "Priority of Vet",
+        }
 
-class VetProfileForm(forms.ModelForm):
+class DogEventForm(forms.ModelForm):
     class Meta:
-        model = VetProfile
-        fields = ('name_of_vet', 'phone_number', 'street', 'town', 'county', 'postcode')
+        model = DogEvent
+        fields = ('name', 'dog', 'event_type', 'date', 'notes')
+        labels = {
+            'name': 'Name of Event',
+            'event_type': 'Type of Event',
+            'date': 'Date of Event'
+        }
