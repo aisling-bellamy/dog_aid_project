@@ -51,6 +51,7 @@ REGISTRATION_OPEN = True
 REGISTRATION_AUTO_LOGIN = True
 LOGIN_REDIRECT_URL = 'dog_aid:index'
 LOGIN_URL = 'auth_login'
+LOGOUT_REDIRECT_URL = 'dog_aid:index'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -140,3 +141,4 @@ STATIC_URL = '/static/'
 
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
+DOG_MEDIA_URL = '/media/dog_images/'
