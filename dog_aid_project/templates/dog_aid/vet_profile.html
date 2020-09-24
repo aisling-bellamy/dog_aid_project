@@ -1,0 +1,36 @@
+{% extends 'dog_aid/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Profile for {{ selected_vet.name }}
+{% endblock %}
+
+{% block body_block %}
+<div class="jumbotron p-4 bg-white border border-warning">
+    <div class="container">
+        <h1 class="jumbotron-heading text-success">{{ selected_vet.name }}</h1>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="mb-6">
+                <div class="card-body border border-warning">
+                    <div class="container">
+                        Name: {{ selected_vet.name }}<br/><br/>
+                        Phone number: {{ selected_vet.phone_number }}<br/><br/>
+                        Address: {{ selected_vet.address }}<br/><br/>
+                        Type: {{ selected_vet.type }}<br/><br/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><br/><br/>
+<div class="container">
+<button class="btn btn-warning" role="button">Edit profile</button><br/><br/>
+    <a href="{% url 'dog_aid:vet_list' %}" class="btn btn-warning" role="button">Back to list of vets</a>
+</div>
+
+<br/>
+{% endblock %}

@@ -14,15 +14,20 @@
 </div>
 
 <div class="container">
+    {% if dog_profile_list %}
     <div class="row">
-        {% if dog_profile_list %}
         <div class="panel-body">
             <div class="list-group ">
             {% for list_dog in dog_profile_list %}
                 <div class="list-group-item border border-warning">
                     <h4 class="list-group-item-heading">
-                        <a href="{% url 'dog_aid:dog_profile' list_dog.dog_name %}">
-                        {{ list_dog.dog_name }}
+                        {% if list_dog.picture %}
+                        <img src="{{ MEDIA_URL }}{{ list_dog.picture }}" width="200" height="200"/>
+                        {% else %}
+                        <img src="{{ MEDIA_URL }}/dog_images/default.jpg" width="200" height="200"/>
+                        {% endif %}
+                        <a href="{% url 'dog_aid:dog_profile' list_dog.name %}">
+                        {{ list_dog.name }}
                         </a>
                     </h4>
                 </div>
@@ -33,16 +38,23 @@
             <div class="mb-3">
                 <div class="card-body">
                     <div class="container">
-                            Would you like to register a dog?<br/><br/>
-                            <a href="{% url 'dog_aid:register_dog' %}" class="btn btn-warning" role="button">Register a Dog</a>
+                        <br/><br/>Would you like to register a dog?<br/><br/>
+                        <a href="{% url 'dog_aid:register_dog' %}" class="btn btn-warning" role="button">
+                            Register a Dog
+                        </a><br/><br/>
+                        <a href="{% url 'dog_aid:profile' user.username %}" class="btn btn-warning" role="button">Back to {{ user.username }}'s profile</a>
                     </div>
                 </div>
             </div>
         </div>
-        {% else %}
-        <p>There are no users present on Dog Aid.</p>
-        {% endif %}
     </div>
+    {% else %}
+    You have no dogs currently registered.
+    <br/><br/>Would you like to register a dog?<br/><br/>
+    <a href="{% url 'dog_aid:register_dog' %}" class="btn btn-warning" role="button">
+        Register a Dog
+    </a>
+    {% endif %}
 </div>
 <br/><br/>
 {% endblock %}

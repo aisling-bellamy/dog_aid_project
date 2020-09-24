@@ -2,63 +2,89 @@
 {% load staticfiles %}
 
 {% block title_block %}
-    Profile for {{ selected_user.username }}
+    Profile for {{ selected_dog.name }}
 {% endblock %}
 
 {% block body_block %}
-<div class="jumbotron p-4">
+<div class="jumbotron p-4 bg-white border border-warning">
     <div class="container">
-        <h1 class="jumbotron-heading">{{ selected_user.username }}'s Profile</h1>
+        <h1 class="jumbotron-heading text-success">{{ selected_dog.name }}'s Profile</h1>
     </div>
 </div>
 <div class="container">
     <div class="row">
         <div class="col-md-4">
             <div class="mb-3">
+                <div class="card-body card border-warning">
+                    {% if dog_profile.picture %}
+                    <img src="{{ MEDIA_URL }}{{ dog_profile.picture }}"
+                         width="300" height="300" alt="{{ selected_dog.name }}'s profile image" />
+                    {% else %}
+                    <img src="{{ MEDIA_URL }}/dog_images/default.jpg" width="200" height="200"/>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="mb-2">
                 <div class="card-body">
-                    <!--<img src="{{ MEDIA_URL }}{{ user_profile.picture }}"
-                         width="300" height="300" alt="{{ selected_user.username }}'s profile image" /> <br />-->
+                    <h6 class="list-group" style="text-decoration: underline">
+                        Dog Name: </h6>{{ dog_profile.name }}<br/><br/>
+                    <h6 class="list-group" style="text-decoration: underline">
+                        Date of birth: </h6>{{ dog_profile.DOB }}<br/><br/>
+                    <h6 class="list-group" style="text-decoration: underline">
+                        Breed: </h6>{{ dog_profile.breed }}<br/><br/>
                 </div>
             </div>
         </div>
         <div class="col-md-3">
             <div class="mb-3">
                 <div class="card-body">
-                    {% if selected_user == user %}
-                    Dog Name: {{ dog_profile.dog_name }}<br/><br/>
-                    Date of birth: {{ dog_profile.date_of_birth }}<br/><br/>
-                    Breed: {{ dog_profile.breed_of_dog }}<br/><br/>
-                    <a href="{% url 'dog_aid:appointment' %}" class="btn btn-warning" role="button">Appointment</a><br/><br/>
-                    <a href="{% url 'dog_aid:vet' %}" class="btn btn-warning" role="button">Vet profile</a><br/><br/>
-                    <a href="{% url 'dog_aid:vet' %}" class="btn btn-warning" role="button">Call vet</a><br/><br/>
-                    <div class="form-group mx-auto w-90 ml-9" style="width:500px">
-                        <label for="comment">Notes:</label>
-                        <textarea class="form-control" rows="5" id="comment"></textarea>
-                    </div>
+                    <a href="{% url 'dog_aid:vet_list' %}" class="btn btn-warning" role="button">My vets</a><br/><br/>
+                    <a href="{% url 'dog_aid:register_event' %}" class="btn btn-warning" role="button">Register an event</a><br/><br/>
+                    <a href="{% url 'dog_aid:vet_list' %}" class="btn btn-warning " role="button">Edit {{ dog_profile.name }}'s profile</a><br/><br/>
+                    <a href="{% url 'dog_aid:profile' user.username %}" class="btn btn-warning" role="button">Back to {{ dog_profile.owner }}'s profile</a><br/><br/>
+                    {% if not dog_profile.picture %}
+                    <button class="btn btn-warning" role="button">Add dog picture</button><br/><br/>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-7">
+            <div class="mb-7">
+                <div class="card-body">
+                    <style>table, th, td {border: 1px solid orange;}
+                    th, td {padding: 5px;}
+                    th {text-align: center;background-color: green;color: white;}</style>
+                    <h6 style="text-decoration: underline">{{ selected_dog.name }}'s History</h6>
+                    <table style="width:150%">
+                        <tr>
+                            <th>Date</th>
+                            <th>Name</th>
+                            <th>Event Type</th>
+                            <th>Notes</th>
+                        </tr>
+                        {% if event %}
+                        {% for event in event %}
+                        <tr>
+                            <td>{{event.date}}</td>
+                            <td>{{event.name}}</td>
+                            <td>{{event.event_type}}</td>
+                            <td>{{event.notes}}</td>
+                        </tr>
+                        {% endfor %}
+                        {% else %}
+                        <tr>
+                            <td></td>
+                            <td>No events registered</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        {% endif %}
+                    </table><br/>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-md-4">
-        <div class="card mb-4 border border-warning">
-            <div class="card-body">
-                <h2 class="text-success ">Edit profile</h2>
-                <p class="card-text">
-                <form method="post" action="." enctype="multipart/form-data">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <input type="submit" value="Update" />
-                </form>
-            </div>
-            {% else %}
-            <p>
-                {{user_profile}}
-                <strong>Website:</strong>
-                <a href="{{ user_profile.website }}">{{ user_profile.website }}</a>
-            </p>
-            {% endif %}
-        </div>
-    </div>
 </div>
-
 {% endblock %}

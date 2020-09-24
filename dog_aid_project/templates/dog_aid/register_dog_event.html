@@ -1,0 +1,26 @@
+{% extends 'dog_aid/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Add new event
+{% endblock %}
+
+{% block body_block %}
+<div class="jumbotron p-4 bg-white border border-warning">
+    <div class="container">
+        <h1 class="jumbotron-heading text-success">Add new event</h1>
+    </div>
+</div>
+{% if registered %}
+<a href="{% url 'dog_aid:profile' user.username %}" class="btn btn-warning" role="button">Return to Profile</a><br/><br/>
+{% else %}
+<div class="container">
+<form id="event_form" method="post" action="{% url 'dog_aid:register_event' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ event_form.as_p }}
+    <input type="submit" name="submit" value="Register" /><br/><br/>
+</form>
+</div>
+{% endif %}
+
+{% endblock %}

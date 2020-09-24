@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<ul>
+    <div class="row">
+        <div class="card-body">
+            {% for illness in emergency_illnesses %}
+                <li>
+                <strong>
+                      <a href="{% url 'dog_aid:illness_profile' illness %}">{{ illness }}</a>
+                </strong>
+                </li>
+            {% endfor %}<br/>
+        </div>
+        <div class="card-body">
+            {% for symptom in emergency_symptoms %}
+                <li>
+                <strong>
+                    <a href="{% url 'dog_aid:symptom_profile' symptom %}">{{ symptom }}</a>
+                </strong>
+                </li>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+</ul>

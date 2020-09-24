@@ -39,31 +39,32 @@
                             <ul class="dropdown-menu">
                                 {% if user.is_authenticated %}
                                 <li><a class="dropdown-item" href="{% url 'dog_aid:profile' user.username %}">Profile</a></li>
-                                <li><a class="dropdown-item" href="{% url 'dog_aid:list_profiles' %}">List Profiles </a></li>
+                                <li><a class="dropdown-item" href="{% url 'dog_aid:register_dog' %}">Register a Dog</a></li>
                                 <li><a class="dropdown-item" href="{% url 'auth_logout' %}">Log out</a></li>
                                 {% else %}
                                 <li><a class="dropdown-item" href="{% url 'auth_login' %}">Login</a></li>
                                 <li><a class="dropdown-item" href="{% url 'dog_aid:register' %}">Register</a></li>
                                 {% endif %}
-                                <li><a class="dropdown-item" href="{% url 'dog_aid:register_dog' %}">Register a Dog</a></li>
                             </ul>
                         </div>
                         <div class="dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown">Illnesses
                             <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item text-danger" href="{% url 'dog_aid:emergency' %}">Emergency</a></li>
-                                <li><a class="dropdown-item" href="{% url 'dog_aid:illnesses' %}">All</a></li>
+                                <li><a class="dropdown-item" href="{% url 'dog_aid:illness_all' %}">All</a></li>
                             </ul>
                         </div>
                         <div class="dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown">Vet
                             <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item text-danger" href="{% url 'dog_aid:profile' %}">Call vet</a></li>
-                                <li><a class="dropdown-item" href="{% url 'dog_aid:vet' %}">Vet profile</a></li>
+                                {% if user.is_authenticated %}
+                                <li><a class="dropdown-item" href="{% url 'dog_aid:vet_list' %}">My vets</a></li>
+                                {% endif %}
                                 <li><a class="dropdown-item" href="{% url 'dog_aid:vet_register' %}">Register vet</a></li>
                             </ul>
                         </div>
                         <li class="nav-item "><a class="nav-link text-body" href="{% url 'dog_aid:quiz' %}">Quiz</a></li>
+                        <li class="nav-item "><a class="nav-link text-body" href="{% url 'dog_aid:training' %}">Training</a></li>
                     </ul>
                 </div>
             </nav>
@@ -71,33 +72,40 @@
 
         <div class="container-fluid">
             <div class="row">
-                <nav class="col-md-2 d-none d-md-block bg-warning sidebar">
-                    <div class="sidebar-sticky">
-                        <div class="w-75 ml-3">
-                            <input type="search"
-                                   id="search-input"
-                                   class="form-control ds-input text-body"
-                                   placeholder="Search..." />
+                <div class="col-md-2 d-none d-md-block bg-warning sidebar">
+                    <ul class="nav nav-list flex-column">
+                        <div class="sidebar-sticky">
+                            <div class="w-75 ml-3">
+                                <li class=nav-item">Type to find an illness or symptom</li><br/>
+                                <form>
+                                    <li class="nav-item"><input class="search-query form-control" type="text"
+                                                        name="suggestion" value="" id="suggestion" /></li>
+                                </form><br/>
+                                <div id="illness_suggest">
+                                    {% get_illness_list illnesses %}
+                                    {% get_symptom_list symptoms %}
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </nav>
-
-                <main role="main" class="col-md-9  ml-sm-auto col-lg-10 px-4">
-                    {% block body_block %}
-                    {% endblock %}
-
-                    <!-- FOOTER -->
-                    <footer>
-                        <p class="float-right"><a class="text-warning" href="#">Back to top</a></p>
-                        <p>&copy; 2020 Dog Aid &middot; <a class="text-warning" href="#">Privacy</a> &middot; <a class="text-warning" href="#">Terms</a></p>
-                    </footer>
-                </main>
+                    </ul>
+                </div>
             </div>
         </div>
 
-        <!-- Bootstrap core JavaScript -->
-        <!-- Placed at the end of the document so the pages load faster -->
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <main role="main" class="col-md-9  ml-sm-auto col-lg-10 px-4">
+            {% block body_block %}
+            {% endblock %}
+
+            <footer>
+                <p class="float-right"><a class="text-warning" href="#">Back to top</a></p>
+                <p>&copy; 2020 Dog Aid &middot; <a class="text-warning" href="#">Privacy</a> &middot; <a class="text-warning" href="#">Terms</a></p>
+            </footer>
+        </main>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+        <script src="{% static "js/dog_aid-ajax.js" %}"></script>
+
+        <script src="{% static "js/jquery-3.3.1.min.js" %}" crossorigin="anonymous"></script>
         <script>window.jQuery || document.write('<script src="https://getbootstrap.com/docs/4.2/assets/js/vendor/jquery-slim.min.js"><\/script>')</script><script src="https://getbootstrap.com/docs/4.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-zDnhMsjVZfS3hiP7oCBRmfjkQC4fzxVxFhBx8Hkz2aZX8gEvA/jsP3eXRCvzTofP" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
         <script src="https://getbootstrap.com/docs/4.2/examples/dashboard/dashboard.js"></script>

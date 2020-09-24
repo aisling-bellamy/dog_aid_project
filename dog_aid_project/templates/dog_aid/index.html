@@ -15,24 +15,57 @@
 
 <div class="container">
     <div class="row">
-        {% if user.is_authenticated %}
-            <div class="col-md-4">
-                <div class="card mb-4 border border-warning">
-                    <div class="card-body">
-                        <h2 class="text-success ">View your profile</h2>
-                        <div>View and edit your dog's profile</div><br/>
-                        <p class="card-text">
-                            <a href="{% url 'dog_aid:profile' user.username %}" class="btn btn-warning" role="button">Profile</a>
-                        </p>
-                    </div>
+        <div class="col-md-4">
+            <div class="card mb-4 border border-warning">
+                <div class="card-body">
+                    <h2 class="text-success">Dog first aid</h2>
+                    <div>Learn how to treat your dog's medical needs and prepare for an emergency situation</div><br/>
+                    <p class="card-text">
+                        <a href="{% url 'dog_aid:emergency' %}" class="btn btn-warning" role="button">Dog first aid</a>
+                    </p>
                 </div>
             </div>
+        </div>
+        {% if user.is_authenticated %}
+        <div class="col-md-4">
+            <div class="card mb-4 border border-warning">
+                <div class="card-body">
+                    <h2 class="text-success ">View your profile</h2>
+                    <div>View and edit your profile</div><br/>
+                    <p class="card-text">
+                        <a href="{% url 'dog_aid:profile' user.username %}" class="btn btn-warning" role="button">Profile</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-4 border border-warning">
+                <div class="card-body">
+                    <h2 class="text-success ">View your dog's profile</h2>
+                    <div>View and edit your dog's profile</div><br/>
+                    <p class="card-text">
+                        <a href="{% url 'dog_aid:dog_profile_list' %}" class="btn btn-warning" role="button">List of your dog profiles</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-4 border border-warning">
+                <div class="card-body">
+                    <h2 class="text-success ">View your vets</h2>
+                    <div>Contact your vet</div><br/>
+                    <p class="card-text">
+                        <a href="{% url 'dog_aid:vet_list' %}" class="btn btn-warning" role="button">Your vets</a>
+                    </p>
+                </div>
+            </div>
+        </div>
         {% else %}
         <div class="col-md-4">
             <div class="card mb-4 border border-warning">
                 <div class="card-body">
-                    <h2 class="text-success">Login to your dog's profile</h2>
-                    <div>View your dog's details, appointments etc</div><br/>
+                    <h2 class="text-success">Login to your profile</h2>
+                    <div>View your profile</div><br/>
                     <a href="{% url 'auth_login' %}" class="btn btn-warning" role="button">Login</a>
                 </div>
             </div>
@@ -40,10 +73,10 @@
         <div class="col-md-4">
             <div class="card mb-4 border border-warning">
                 <div class="card-body">
-                    <h2 class="text-success">Create a profile for you dog</h2>
-                    <div>Register your dog's details, create reminders for appointments and store your dog's medical details</div><br/>
+                    <h2 class="text-success">Create a profile</h2>
+                    <div>Register your details and create a profile for you dog to register their details</div><br/>
                     <p class="card-text">
-                        <a href="{% url 'registration_register' %}" class="btn btn-warning" role="button">Register</a>
+                        <a href="{% url 'dog_aid:register' %}" class="btn btn-warning" role="button">Register</a>
                     </p>
                 </div>
             </div>
@@ -52,10 +85,10 @@
         <div class="col-md-4">
             <div class="card mb-4 border border-warning">
                 <div class="card-body">
-                    <h2 class="text-success">Dog first aid</h2>
-                    <div>Learn how to treat your dog's medical needs and prepare for an emergency situation</div><br/>
+                    <h2 class="text-success">General first aid</h2>
+                    <div>View the full list of dog first aid</div><br/>
                     <p class="card-text">
-                        <a href="{% url 'dog_aid:illnesses' %}" class="btn btn-warning" role="button">Dog first aid</a>
+                        <a href="{% url 'dog_aid:illness_all' %}" class="btn btn-warning" role="button">Genral first aid</a>
                     </p>
                 </div>
             </div>
@@ -72,11 +105,9 @@
         <div class="col-md-4">
             <div class="card mb-4 border border-warning">
                 <div class="card-body">
-                    <h2 class="text-success">Vet profile</h2>
-                    <div>View or edit your vet's profile</div><br/>
-                    <a href="{% url 'dog_aid:vet' %}" class="btn btn-warning" role="button">Vet profile</a><br/><br/>
-                    <div>Or create a profile for your vet if you do not have one</div><br/>
-                    <a href="{% url 'dog_aid:vet_register' %}" class="btn btn-warning" role="button">Register a vet</a>
+                    <h2 class="text-success">Training</h2>
+                    <div>Learn techniques to train your dog</div><br/>
+                    <a href="{% url 'dog_aid:training' %}" class="btn btn-warning" role="button">Training</a>
                 </div>
             </div>
         </div>

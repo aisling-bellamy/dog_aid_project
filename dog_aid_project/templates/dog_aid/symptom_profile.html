@@ -1,0 +1,44 @@
+{% extends 'dog_aid/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Profile for {{ selected_symptom.name }}
+{% endblock %}
+
+{% block body_block %}
+<div class="jumbotron p-4 bg-white border border-warning">
+    <div class="container">
+        <h1 class="jumbotron-heading text-success">{{ selected_symptom.name }}</h1>
+        <h7>{{ selected_symptom.description }}</h7>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-7">
+        <div class="mb-4">
+            <h3 class="d-flex justify-content-center" style="text-decoration: underline">
+                        Illnesses with this symptom: </h3><br/>
+            {% for illness in illness_list %}
+            <div class="card-body border border-warning">
+                <div class="container">
+                    <h5 class="d-flex justify-content-center"><a href="{% url 'dog_aid:illness_profile' illness %}">{{ illness.name }}</a></h5>
+                    {{ illness.description|linebreaks }}
+                </div>
+            </div><br/>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col-md-5">
+        <div class="mb-5">
+            <div class="container">
+                <div class="card-body border border-warning">
+                    <div class="d-flex justify-content-center">
+                        <img src="{{ MEDIA_URL }}{{ selected_symptom.picture }}"width="250" height="250"
+                             alt="{{ selected_symptom.name }}" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><br/>
+
+{% endblock %}

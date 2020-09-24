@@ -1,0 +1,69 @@
+{% extends 'dog_aid/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Profile for {{ selected_illness.name }}
+{% endblock %}
+
+{% block body_block %}
+<div class="jumbotron p-4 bg-white border border-warning">
+    <div class="container">
+        <h1 class="jumbotron-heading text-success">{{ selected_illness.name }}</h1>
+<!--        <h7>{{ selected_illness.description|linebreaks }}</h7>-->
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="mb-6">
+                <div class="card-body border border-warning">
+                    <div class="container">
+                        <h6 style="text-decoration: underline">Description</h6>
+                        {{ selected_illness.description|linebreaks }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><br/>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="mb-6">
+                <div class="card-body border border-warning">
+                    <div class="container">
+                        <h6 style="text-decoration: underline">Symptoms</h6>
+                        {% for symptom in symptom_list %}
+                            <a href="{% url 'dog_aid:symptom_profile' symptom %}">
+                                {{ symptom.name }}</a><br/><br/>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="mb-6">
+                <div class="card-body border border-warning">
+                    <div class="container">
+                        <h6 style="text-decoration: underline">Treatment</h6>
+                        {{ selected_illness.treatment|linebreaks }}
+                            <img src="{{ MEDIA_URL }}{{ selected_illness.picture }}"width="300"
+                                 height="300" alt="{{ selected_illness.name }}" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="mb-6">
+                <div class="card-body border border-warning">
+                    <div class="container">
+                        <h6 style="text-decoration: underline">Call Vet?</h6>
+                        {{ selected_illness.call_vet|linebreaks }}
+                        <a href="{% url 'dog_aid:vet_list' %}" class="btn btn-warning" role="button">My vets</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><br/>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'dog_aid/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Dog illness
+{% endblock %}
+
+{% block body_block %}
+<div class="jumbotron p-4 bg-white border border-warning">
+    <div class="container">
+        <h1 class="jumbotron-heading text-success">List of all dog illness</h1>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="mb-4">
+                <div class="card-body">
+                    <h3>Browse our list of dog illnesses: </h3><br/>
+                    {% for illness in list_illness %}
+                    <a href="{% url 'dog_aid:illness_profile' illness.name %}">
+                        <li class="mx-auto w-90 ml-9" style="width:210px">{{ illness.name }}</li></a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="mb-4 mx-auto w-90 ml-9" style="width:300px">
+                <div class="card-body">
+                    <h6>Once you have read them, consider taking the quiz to test your knowledge: </h6><br />
+                    <a href="{% url 'dog_aid:quiz' %}" class="btn btn-warning" role="button">Quiz</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="mb-4 mx-auto w-90 ml-9" style="width:300px">
+                <div class="card-body">
+                    <h6>Or if you need emergency first aid: </h6><br />
+                    <a href="{% url 'dog_aid:emergency' %}" class="btn btn-warning" role="button">Emergency</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br/><br/>
+
+{% endblock %}

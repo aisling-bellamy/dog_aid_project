@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+
+<ul>
+    {% for illness in illnesses %}
+        <li>
+        <strong>
+              <a href="{% url 'dog_aid:illness_profile' illness %}">{{ illness }}</a>
+        </strong>
+        </li>
+    {% endfor %}<br/>
+    {% for symptom in symptoms %}
+        <li>
+        <strong>
+              <a href="{% url 'dog_aid:symptom_profile' symptom %}">{{ symptom }}</a>
+        </strong>
+        </li>
+    {% endfor %}
+</ul>

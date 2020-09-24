@@ -6,25 +6,24 @@
 {% endblock %}
 
 {% block body_block %}
-<div class="jumbotron p-4 bg-white border">
+<div class="jumbotron p-4 bg-white border border-warning">
     <div class="container">
-        <h1 class="jumbotron-heading">Register your vet's profile</h1>
+        <h1 class="jumbotron-heading text-success">Register a new vet</h1>
     </div>
 </div>
 <div class="container">
     {% if registered %}
-    <strong>You are now registered</strong><br/>
+    <strong>New vet registered</strong><br/>
     <a href="{% url 'dog_aid:index' %}">Return to the homepage.</a><br />
     {% else %}
-    <strong>Fill in your details to register</strong><br /><br/>
+    <strong>Fill in your vet's details to register</strong><br /><br/>
     <form id="user_form" method="post" action="{% url 'dog_aid:vet_register' %}" enctype="multipart/form-data">
         {% csrf_token %}
-        <div class="jumbotron p-4 bg-white border">
+        <div class="jumbotron p-4 bg-white">
             <div class="container">
-                Fill in your details: <br/><br/>
-                {{ vet_form.as_p }}
-            </div>
+                {{ form.as_p }}
             <input type="submit" name="submit" value="Register" />
+            </div>
         </div>
     </form><br/>
 </div>

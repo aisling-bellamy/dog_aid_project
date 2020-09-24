@@ -1,0 +1,56 @@
+{% extends 'dog_aid/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Vet Profiles
+{% endblock %}
+
+{% block body_block %}
+<div class="jumbotron p-4 bg-white border border-warning">
+    <div class="container">
+        <h1 class="jumbotron-heading text-success">Vet profiles</h1>
+    </div>
+</div>
+
+<div class="container">
+    {% if vet_list %}
+    <div class="row">
+        <div class="panel-body">
+            <div class="list-group ">
+            {% for list_vet in vet_list %}
+                <div class="list-group-item border border-warning">
+                    <h4 class="list-group-item-heading">
+                        <a href="{% url 'dog_aid:vet_profile' list_vet.name %}">
+                        {{ list_vet.name }}
+                        </a>
+                    </h4><br/>
+                    <h6 class="list-group" style="text-decoration: underline">
+                        Phone number: </h6>{{ list_vet.phone_number }}<br/><br/>
+                    <h6 class="list-group" style="text-decoration: underline">
+                        Address: </h6>{{ list_vet.address }}<br/><br/>
+                    <h6 class="list-group" style="text-decoration: underline">
+                        Priority: </h6>{{ list_vet.type }}<br/><br/>
+                </div>
+            {% endfor %}
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="mb-3">
+                <div class="card-body">
+                    <div class="container">
+                            Would you like to register a new vet?<br/><br/>
+                            <a href="{% url 'dog_aid:vet_register' %}" class="btn btn-warning" role="button">Register a Vet</a><br/><br/>
+                        <a href="{% url 'dog_aid:profile' user.username %}" class="btn btn-warning" role="button">Back to {{ user.username }}'s profile</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    You have no vets currently registered<br/><br/>
+    Would you like to register a new vet?<br/><br/>
+                            <a href="{% url 'dog_aid:vet_register' %}" class="btn btn-warning" role="button">Register a Vet</a>
+    {% endif %}
+</div>
+<br/><br/>
+{% endblock %}
