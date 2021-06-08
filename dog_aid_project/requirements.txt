@@ -7,7 +7,7 @@ django-registration-redux==2.2
 filelock==3.0.12
 idna==2.9
 pbr==5.4.5
-Pillow==7.1.2
+Pillow==8.2.0
 pytz==2020.1
 requests==2.23.0
 six==1.15.0
